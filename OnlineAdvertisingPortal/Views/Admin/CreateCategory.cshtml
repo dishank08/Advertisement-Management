@@ -1,0 +1,47 @@
+﻿@model OnlineAdvertisingPortal.Models.Categories
+
+@{
+    ViewBag.Title = "CreateCategory";
+}
+
+<h2>CreateCategory</h2>
+
+@using (Html.BeginForm("CreateCategory", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Categories</h4>
+        @if (ViewBag.Msg != null)
+        {
+            <div class="form-group">
+                <div class="col-md-10">@ViewBag.Msg</div>
+            </div>
+        }
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Categoryname, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Categoryname, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Categoryname, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CategoryPath, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10" s>
+                <input type="file" name="Imagefile" class="btn btn-primary" required />
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+

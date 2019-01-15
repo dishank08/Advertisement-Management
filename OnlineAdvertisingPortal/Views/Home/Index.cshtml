@@ -1,0 +1,18 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>Online Adverisement Portal</h1>
+    <p class="lead">Online Advertisement portal is a plateform through which you can advertise your bussiness or service freely. </p>
+    <p><a href="/Account/Login" class="btn btn-primary btn-lg">Lets start &raquo;</a></p>
+</div>
+<h2>Popular adverisements</h2>
+
+@foreach (var item in ViewBag.Popular)
+{
+    <a href="/Advertise/Details/@item.Id" class="btn btn-default">
+        <img src="@Url.Content(item.Imagepath)" height="220" width="350">
+    </a>
+
+}

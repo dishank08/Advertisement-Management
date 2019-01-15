@@ -1,0 +1,11 @@
+﻿@model IEnumerable<OnlineAdvertisingPortal.Models.BusinessDetails>
+
+<h2>Business</h2>
+@foreach (var item in Model)
+{
+    <a href="/Advertise/Details/@item.Id" class="btn btn-default">
+        <img src="@Url.Content(item.Imagepath)" height="220" width="350">
+    </a> 
+         
+}
+

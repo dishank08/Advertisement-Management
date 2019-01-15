@@ -1,0 +1,31 @@
+﻿@model IEnumerable<OnlineAdvertisingPortal.Models.Categories>
+
+<table class="table" border="0">
+    <tr>
+        <th>
+            <h2>Categories</h2>    
+        </th>
+    </tr>
+    @using (Html.BeginForm("Index", "Category"))
+    {
+    
+        foreach (var item in Model)
+        {
+            
+            <td>
+                <center>
+                        <a href="Category/Business/?name=@item.Categoryname"  class="btn btn-default">
+                                <img src="@Url.Content(item.CategoryPath)" height="200" width="200">
+                                <br />
+                        </a>
+                        <h3>@item.Categoryname</h3>
+                </center>
+            </td>
+            if (@item.Categoryname == "Entertainment" || @item.Categoryname == "Saloon")
+            {
+                <tr>     
+                </tr>
+            }
+        }
+    }
+</table>

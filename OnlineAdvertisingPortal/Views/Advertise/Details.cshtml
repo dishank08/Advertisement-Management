@@ -1,0 +1,142 @@
+﻿@model OnlineAdvertisingPortal.Models.BusinessDetails
+
+
+<div>
+    <h3>BusinessDetails</h3>
+    <hr />
+    <table class="dl-horizontal" style="line-height:30px; font-size:16px;" >
+       
+         <tr>
+            <td colspan="2">
+                <img src="@Url.Content(Model.Imagepath)" width="400" height="220" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <br />
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Businessname)
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.Businessname)
+            </td>
+        </tr>
+
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Ownername)
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.Ownername)
+            </td>
+        </tr>
+
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Category)
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.Category)
+            </td>
+        </tr>
+
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.Description)
+            </td>
+        </tr>
+        
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.Address)
+            </td>
+        </tr>
+
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Mobile)
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.Mobile)
+            </td>
+        </tr>
+    </table>
+    <table style="line-height:30px; font-size:16px; font-weight:bold;" >    
+         <tr>
+             @if (@Model.Overall != 0)
+             {
+             <td style="color:darkcyan">Overall Rating for @Model.Businessname is @Model.Overall  Stars.</td>
+             }
+             else
+             {
+                 <td style="color:darkcyan">Be the First to rate @Model.Businessname</td>
+             }
+
+
+        @if (Session["Username"] == null)
+        {
+            <tr>
+
+            <td>
+                <br />
+                <a href="@Url.Action("Login","Account")">
+                   Login to post your review
+                </a>
+            </td>
+                </tr>
+        }
+        else
+        {
+            int i = 0;
+            
+            foreach (var v in ViewBag.Rated)
+            {
+
+                if(v.Username == Session["Username"].ToString())
+                {
+                    i = 1;                    
+                }
+            }
+            if (i == 1)
+            {
+                <tr></tr>
+                <td style="color:forestgreen">
+                    You have Submitted Your Review.
+                </td>
+            }
+            else
+            {
+                <tr></tr>
+                <td> Give your Ratings:</td>
+                <br />
+            <tr></tr>
+            <td>
+                @using (Html.BeginForm("SetRatings", "Ratings"))
+                {
+                    @Html.HiddenFor(x => x.Id)
+                           
+                   for (i = 5; i >= 1; i--)
+                   {
+                                <input type="radio" name="rate" value="@i" />
+                                <label>@i stars</label>
+                   }
+                    <br/>
+                    <input type="submit" value="Submit" class="btn btn-primary" />
+                                   
+               }
+              </td>
+            }
+        }
+
+
+            </table>
+        </div>
